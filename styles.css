@@ -1,0 +1,14 @@
+.cell {
+    border-color: black;
+    border-style: solid;
+    display: inline;
+    width:33%;
+    margin: auto;
+}
+.container {
+    display: block;
+    width:200px;
+    height: 200px;
+    margin:auto;
+    vertical-align: middle;
+}
