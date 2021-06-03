@@ -2,15 +2,16 @@
     border-color: black;
     border-style: solid;
     border-radius: 10px;
-    width:33%;
     margin: auto;
-    padding: 40px;
+    width: 80px;
+    height: 80 px;
+    padding: 60px;
     text-align: center;
 }
 .container {
     display: grid;
     grid-gap: 0px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 33%);
     width:500px;
     height:500px;
     margin:auto;
