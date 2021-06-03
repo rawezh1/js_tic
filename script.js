@@ -1,12 +1,14 @@
 const player = (name) => {
     let turn = false;
-    return {name, turn};
+    const changeTurn = () => {turn = !turn;}
+    return {name, turn, changeTurn};
 };
 
 const game = (function(){
     let gameBoard = new Array(9).fill('-');
     let playerX =  player('X');
     let playerO =  player('O');
+    playerX.changeTurn();
     startTurn(gameBoard,playerX);
     return {gameBoard}
 })();
@@ -24,7 +26,7 @@ function startTurn(board,player){
         cell.addEventListener('click',function (element){
             if (board[i] != '-') {return}
             element.innerHTML = player.name
-            gameBoard[i] = player.name 
+            gameBoard[i] = player.name
         });
         boardCont.appendChild(cell);
     }
