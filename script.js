@@ -8,7 +8,6 @@ const game = (function(){
     let playerX =  player('X');
     let playerO =  player('O');
     createBoard()
-    //startTurn(gameBoard,playerX);
     return {gameBoard, playerO, playerX}
 })();
 
@@ -20,12 +19,26 @@ function createBoard(){
         cell.id = `${i}`;
         cell.addEventListener('click',function (event){
             changeSymbol(event.target)
+            checkEnd()
         });
         boardCont.appendChild(cell);
     }
     boardCont.classList.add('container');
     document.body.appendChild(boardCont);
 };
+
+function checkEnd(){
+    checkWin();
+    checkTie();
+    
+}
+
+function checkTie(){
+    for (i=0;i<9;i++) {
+        if (game.gameBoard[i] == undefined) { return false;}
+    }
+    return true;
+}
 
 function changeSymbol(element){
     if (element.innerHtml = '') {return};
@@ -45,23 +58,3 @@ function changeSymbol(element){
         }
     
 }
-function startTurn(board,player){
-    document.body.innerHTML ='';
-    let boardCont = document.createElement('div');
-    for (i=0;i<9;i++){
-        let cell = document.createElement('button');
-        cell.classList.add('cell');
-        if (board[i] != null) {cell.innerHTML = board[i];}
-        cell.id = `${i}`;
-        cell.addEventListener('click',function (){
-            if (!board[i]) {
-                cell.innerHTML = player.name;
-                game.gameBoard[i] = player.name;
-                cell.style.backgroundColor = 'red'
-            }
-        });
-        boardCont.appendChild(cell);
-    }
-    boardCont.classList.add('container');
-    document.body.appendChild(boardCont);
-};
