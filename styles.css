@@ -16,3 +16,8 @@
     height:500px;
     margin:auto;
 }
+p {text-align: center;
+   font-size: 30px;
+   font-family: Helvetica;
+   color:blue;
+}

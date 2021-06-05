@@ -32,8 +32,17 @@ function createBoard(){
 };
 
 function checkEnd(){
-    if (checkWin()){console.log(`Player ${game.gameWinner} wins!`)};
-    if (checkTie()){console.log('It is a tie')};
+    if (checkWin()){
+        let winBox = document.createElement('p');
+        winBox.innerHTML = `Congratulations player ${game.gameWinner} you won!`;
+        winBox.id = 'end';
+        document.body.appendChild(winBox);
+    };
+    if (checkTie()){
+        let tieBox = document.createElement('p');
+        tieBox.innerHTML = `It is a tie!`;
+        tieBox.id = 'end';
+        document.body.appendChild(tieBox)};
 }
     
 
@@ -111,9 +120,10 @@ function createRestartButton(){
     restartButton.innerHTML = 'Restart';
     restartButton.addEventListener('click',function (){
         document.body.removeChild(document.getElementById('boardCont'))
+        if (document.getElementById('end')) {document.body.removeChild(document.getElementById('end'))}
         game.gameBoard = new Array (9);
-        game.playerO = player('O')
-        game.playerX = player('X')
+        game.playerO = player('O');
+        game.playerX = player('X');
         game.gameWinner = '';
         createBoard();
     });
