@@ -88,7 +88,6 @@ function checkTie(){
 
 function changeSymbol(element){
     if (element.innerHtml = '') {return};
-    console.log(game.playerO.turn)
     if (game.playerO.turn) {
         element.innerHTML = 'O';
         game.gameBoard[element.id] = 'O';
