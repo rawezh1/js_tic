@@ -7,8 +7,9 @@ const game = (function(){
     let gameBoard = new Array(9);
     let playerX =  player('X');
     let playerO =  player('O');
+    let gameWinner = '';
     createBoard()
-    return {gameBoard, playerO, playerX}
+    return {gameBoard, playerO, playerX, gameWinner}
 })();
 
 function createBoard(){
@@ -28,9 +29,23 @@ function createBoard(){
 };
 
 function checkEnd(){
-    checkWin();
-    checkTie();
+    if (checkWin()){console.log(`Player ${game.gameWinner} wins!`)};
+    if (checkTie()){console.log('It is a tie')};
+}
     
+
+
+function checkWin(){
+    for (i=0;i<7;i += 3){
+        let firstCell = game.gameBoard[i];
+        if (firstCell = undefined) {continue;}
+        if (firstCell == game.gameBoard[i+1] && firstCell == game.gameBoard[i+2]){
+            game.gameWinner = firstCell;
+            return true;
+
+        }
+    }
+    return false;
 }
 
 function checkTie(){
