@@ -84,7 +84,7 @@ function checkDiaWin(){
         game.gameWinner = midCell;
         return true;
     }
-    else if (game.gameBoard[6]== midCell && gameBoard[2] == midCell){
+    else if (game.gameBoard[6]== midCell && game.gameBoard[2] == midCell){
         game.gameWinner = midCell;
         return true;
     }
