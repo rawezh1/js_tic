@@ -1,6 +1,7 @@
 const player = (name) => {
+    let userName = ''
     let turn = false;
-    return {name, turn};
+    return {name, turn, userName};
 };
 
 const game = (function(){
@@ -8,7 +9,8 @@ const game = (function(){
     let playerX =  player('X');
     let playerO =  player('O');
     let gameWinner = '';
-    createBoard()
+    createRestartButton();
+    createBoard();
     return {gameBoard, playerO, playerX, gameWinner}
 })();
 
@@ -25,6 +27,7 @@ function createBoard(){
         boardCont.appendChild(cell);
     }
     boardCont.classList.add('container');
+    boardCont.id = 'boardCont';
     document.body.appendChild(boardCont);
 };
 
@@ -101,4 +104,18 @@ function changeSymbol(element){
         game.playerO.turn = !game.playerO.turn;
         }
     
+}
+
+function createRestartButton(){
+    let restartButton = document.createElement('button');
+    restartButton.innerHTML = 'Restart';
+    restartButton.addEventListener('click',function (){
+        document.body.removeChild(document.getElementById('boardCont'))
+        game.gameBoard = new Array (9);
+        game.playerO = player('O')
+        game.playerX = player('X')
+        game.gameWinner = '';
+        createBoard();
+    });
+    document.body.appendChild(restartButton);
 }
