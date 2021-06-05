@@ -36,14 +36,45 @@ function checkEnd(){
 
 
 function checkWin(){
+    if (checkHorWin() || checkVerWin() || checkDiaWin()) {return true;}
+    return false;
+}
+
+function checkHorWin(){
     for (i=0;i<7;i += 3){
         let firstCell = game.gameBoard[i];
-        if (firstCell = undefined) {continue;}
+        if (firstCell == null) {continue;}
         if (firstCell == game.gameBoard[i+1] && firstCell == game.gameBoard[i+2]){
             game.gameWinner = firstCell;
             return true;
 
         }
+    }
+    return false;
+}
+
+function checkVerWin(){
+    for (i=0;i<3;i++){
+        let firstCell = game.gameBoard[i];
+        if (firstCell == null) {continue;}
+        if (firstCell == game.gameBoard[i+3] && firstCell == game.gameBoard[i+6]){
+            game.gameWinner = firstCell;
+            return true;
+        }
+    }
+    return false;
+}
+
+function checkDiaWin(){
+    let midCell = game.gameBoard[4];
+    if (midCell == null) {return false;}
+    if (game.gameBoard[0] == midCell && game.gameBoard[8] == midCell){
+        game.gameWinner = midCell;
+        return true;
+    }
+    else if (game.gameBoard[6]== midCell && gameBoard[2] == midCell){
+        game.gameWinner = midCell;
+        return true;
     }
     return false;
 }
@@ -63,7 +94,6 @@ function changeSymbol(element){
         game.gameBoard[element.id] = 'O';
         element.style.backgroundColor = 'green';
         game.playerO.turn = !game.playerO.turn;
-        console.log(game.playerO.turn)
     }
     else {
         element.innerHTML = 'X'
