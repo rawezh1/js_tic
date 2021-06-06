@@ -17,7 +17,7 @@ const game = (function(){
 function createBoard(){
     let boardCont = document.createElement('div');
     for (i=0;i<9;i++){
-        let cell = document.createElement('button');
+        let cell = document.createElement('div');
         cell.classList.add('cell');
         cell.id = `${i}`;
         cell.addEventListener('click',function (event){
