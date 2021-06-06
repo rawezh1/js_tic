@@ -1,9 +1,10 @@
+// Factory function for creating players
 const player = (name) => {
     let userName = ''
     let turn = false;
     return {name, turn, userName};
 };
-
+// Game module that controls flow of game
 const game = (function(){
     let gameBoard = new Array(9);
     let playerX =  player('X');
@@ -13,7 +14,8 @@ const game = (function(){
     createBoard();
     return {gameBoard, playerO, playerX, gameWinner}
 })();
-
+// Board creation function, creates a 3 by 3 board with each element named "cell"
+// then adds an event listner for each cell to check for clicks
 function createBoard(){
     let boardCont = document.createElement('div');
     for (i=0;i<9;i++){
@@ -30,7 +32,7 @@ function createBoard(){
     boardCont.id = 'boardCont';
     document.body.appendChild(boardCont);
 };
-
+// Checks for endgame conditions (win or tie) and shows an appropriate message
 function checkEnd(){
     if (checkWin()){
         let winBox = document.createElement('p');
@@ -46,12 +48,12 @@ function checkEnd(){
 }
     
 
-
+// Checks win conditions
 function checkWin(){
     if (checkHorWin() || checkVerWin() || checkDiaWin()) {return true;}
     return false;
 }
-
+// Checks for horizontal alignment between cells with the same symbol
 function checkHorWin(){
     for (i=0;i<7;i += 3){
         let firstCell = game.gameBoard[i];
@@ -65,6 +67,7 @@ function checkHorWin(){
     return false;
 }
 
+// Checks for vertical alignment between cells of the same symbol
 function checkVerWin(){
     for (i=0;i<3;i++){
         let firstCell = game.gameBoard[i];
@@ -77,6 +80,7 @@ function checkVerWin(){
     return false;
 }
 
+// Checks for diagonal alignment between cells of the same symbol
 function checkDiaWin(){
     let midCell = game.gameBoard[4];
     if (midCell == null) {return false;}
@@ -91,6 +95,7 @@ function checkDiaWin(){
     return false;
 }
 
+// Checks for a tie when all cells are occupied and no alignment occurs
 function checkTie(){
     for (i=0;i<9;i++) {
         if (game.gameBoard[i] == undefined) { return false;}
@@ -98,6 +103,7 @@ function checkTie(){
     return true;
 }
 
+// Changes the content of a cell to an approprite symbol 'X' or 'O' depending on player turn
 function changeSymbol(element){
     if (element.innerHtml = '') {return};
     if (game.playerO.turn) {
@@ -115,6 +121,7 @@ function changeSymbol(element){
     
 }
 
+// Creates a restart button that clears out the previous board and creates a new one
 function createRestartButton(){
     let restartButton = document.createElement('button');
     restartButton.innerHTML = 'Restart';
